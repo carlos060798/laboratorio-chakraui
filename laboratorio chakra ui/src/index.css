@@ -1,0 +1,10 @@
+.custom-button {
+    color: white;
+    width: 300px;
+  }
+  
+  .custom-button:focus,
+  .custom-button:hover {
+    background-color: black;
+    color: white;
+  }
