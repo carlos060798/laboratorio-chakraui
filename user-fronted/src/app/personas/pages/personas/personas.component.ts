@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Importa FormsModule
 import { ApiService } from '../../services/persona.service';
 import { Persona } from '../../interface/Persona.interface';
+import { RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'app-personas',
   standalone: true,
-  imports: [CommonModule,FormsModule], // Añade FormsModule al array de imports
+  imports: [CommonModule,FormsModule,RouterModule],
   templateUrl: './personas.component.html',
 })
 export class PersonasComponent implements OnInit {
