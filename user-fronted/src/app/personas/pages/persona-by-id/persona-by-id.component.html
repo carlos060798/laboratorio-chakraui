@@ -1,25 +1,59 @@
-<div class="card shadow-sm">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img [src]="persona.image" class="img-fluid rounded-start" alt="{{ persona.title }}">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">{{ persona.title }}</h5>
-        <p class="card-text">{{ persona.description }}</p>
-
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="btn-group">
-           <button class="btn btn-outline-danger btn-check ">Editar</button>
-            <button  class="btn btn-outline-danger btn-sm mx-2">Eliminar</button>
+<div class="container-fluid">
+  <div class="row">
+    <!-- Card Column -->
+    <div class="col-md-6">
+      <div class="card shadow-sm h-100">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img [src]="persona.image" class="img-fluid rounded-start h-100 object-fit-cover" alt="{{ persona.title }}">
           </div>
-          <button class="btn btn-outline-danger btn-check">Volver</button>
+          <div class="col-md-8">
+            <div class="card-body d-flex flex-column h-100">
+              <h5 class="card-title">{{ persona.title }}</h5>
+              <p class="card-text flex-grow-1">{{ persona.description }}</p>
+              <p class="card-text"><small class="text-muted">{{ persona.categoria.join(', ') }}</small></p>
+              <div class="d-flex justify-content-between align-items-center mt-auto">
+                <div class="btn-group">
+                  <button class="btn btn-outline-primary btn-sm" (click)="toggleEdit()">Editar</button>
+                  <button (click)="deletePersona()" class="btn btn-outline-danger btn-sm mx-2">Eliminar</button>
+                </div>
+                <button class="btn btn-outline-secondary btn-sm" (click)="router.navigate(['/persona'])">Volver</button>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
 
-        <p class="card-text">
-        </p>
+    <!-- Formulario de Edición Column -->
+    <div class="col-md-6">
+      <div *ngIf="isEditing" class="card shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title">Editar Persona</h5>
+          <form (ngSubmit)="saveChanges()">
+            <div class="mb-3">
+              <label for="titleInput" class="form-label">Título:</label>
+              <input type="text" class="form-control" id="titleInput" [(ngModel)]="editPersona.title" name="title" required>
+            </div>
+            <div class="mb-3">
+              <label for="descriptionInput" class="form-label">Descripción:</label>
+              <textarea class="form-control" id="descriptionInput" [(ngModel)]="editPersona.description" name="description" required rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="imageInput" class="form-label">Imagen:</label>
+              <input type="text" class="form-control" id="imageInput" [(ngModel)]="editPersona.image" name="image" required>
+            </div>
+            <div class="mb-3">
+              <label for="categoriesInput" class="form-label">Categorías:</label>
+              <input type="text" class="form-control" id="categoriesInput" [(ngModel)]="categoriaString" name="categoria" placeholder="Separadas por comas">
+            </div>
+            <div class="d-flex justify-content-end">
+              <button type="submit" class="btn btn-success me-2">Guardar Cambios</button>
+              <button type="button" class="btn btn-secondary" (click)="toggleEdit()">Cancelar</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
 </div>
-

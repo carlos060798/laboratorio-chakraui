@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 import { Persona } from '../interface/Persona.interface';
 
 
+/**
+ * Service for interacting with the API to perform CRUD operations on personas.
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -24,8 +27,8 @@ export class ApiService {
     return this.http.post<Persona>(`${this.baseUrl}`, persona);
   }
 
-  updatePersona(id: string, item: Persona): Observable<Persona> {
-    return this.http.patch<Persona>(`${this.baseUrl}/${id}`, item);
+  updatePersona(id: string, persona: Partial<Persona>): Observable<void> {
+    return this.http.patch<void>(`${this.baseUrl}/${id}`, persona);
   }
 
   deletePersona(id: string): Observable<Persona> {
